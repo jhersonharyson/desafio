@@ -224,3 +224,10 @@ p a:hover {
   background-color: #666;
   -webkit-border-radius: 3px;
 }
+
+
+*{
+  font-family: Arial !important;
+  font-weight: 300;
+  
+}

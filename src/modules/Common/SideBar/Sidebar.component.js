@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import * as $ from 'jquery'
 import { Layout, Menu, Icon, Breadcrumb } from 'antd';
-// import logo from './../../../img/logoc.png'
+ import logo from './../../../img/sw.png'
 
 import './Sidebar.style.css';
 
@@ -40,12 +40,13 @@ class SidebarFuncionario extends Component {
 
 
     render() {
-        return (<div id="div"> {/* style={{ marginTop: "20px" }} */}
+        return (<div id="div" style={{height: "100%"}}> {/* style={{ marginTop: "20px" }} */}
             <Layout style={{ minHeight: '100%' }}>
                 <Sider
                     collapsed={window.innerWidth < 700}
                     style={{ overflow: 'auto', boxShadow: '.1px .1px 1px black' }}>
                     <div className="logo" />
+                    <img src={logo} alt="sw" style={{width: "150px", margin: "25px"}}/>
                     <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
                         <Menu.Item key="1">
                             <Link className="link-home" to="/home" />

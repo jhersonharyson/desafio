@@ -19,13 +19,13 @@ class RouterSwitch extends Component {
 
     render() {
         return (
-            <div>
-                <div  />
+            <div style={{width: "100%", height: "100%"}}>
+                
                 <BrowserRouter>
                     <Switch>
                         <Route path="/" exact={true} render={(props) => <Login {...props} />} />
                         <Route path="/*">
-                            <div>
+                            <div style={{height: "100%"}}>
                                 <SideBar 
                                 //logout={} 
                                 router={this.state.router} >
