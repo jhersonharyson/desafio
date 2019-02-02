@@ -82,8 +82,8 @@ class Home extends Component {
         }
 
 
-        console.log(storage)
-        console.log(nome)
+        // console.log(storage)
+        // console.log(nome)
 
         sessionStorage.setItem('favoritos', storage)
 
@@ -92,10 +92,10 @@ class Home extends Component {
     }
 
 
-    handleSelected = async (nome) => {
-        await this.setState({selected: nome});
-        localStorage.setItem('visualizar',nome)
-        await this.setState({visualizar: true});
+    handleSelected = async (object) => {
+        await this.setState({ selected: object });
+        await localStorage.setItem('visualizar', JSON.stringify(object))
+        await this.setState({ visualizar: true });
     }
 
 
@@ -106,7 +106,6 @@ class Home extends Component {
                 <Input.Search
                     size="large"
                     placeholder="Procurando algum personagem de Start Wars?"
-                    //value={this.state.query}
                     prefix={<Icon type="search"></Icon>}
                     onChange={(event) => this.handleChange(event)}
                     onSearch={_ => { this.handleSubmit() }}
@@ -114,7 +113,7 @@ class Home extends Component {
                 />
                 <div>
                     {
-                        this.state.data && this.state.query ? `Foram encontrados: ${this.state.data.length} registros` : ""
+                        this.state.data && this.state.isTypping ? `Processando...` : this.state.data.length > 1 ? `Total: ${this.state.data.length} registros encontrados` : this.state.data.length == 1 ? "Total: 1 registro encontardo" : "" 
                     }
                 </div>
 
@@ -126,7 +125,7 @@ class Home extends Component {
                                 "animationDuration": "2s",
                                 "animationFillMode": "forwards"
                             }}
-                                actions={[<Icon onClick={_=>this.handleSelected(item.name)} type="eye" />, <Icon onClick={() => this.handleFavor(item.name)} type="heart" style={this.state.atualizaFavoritos ? { color: sessionStorage.getItem('favoritos') == null ? "gray" : (sessionStorage.getItem('favoritos').indexOf(item.name) > 0) ? "red" : "gray" } : { "": "" }} />]}>
+                                actions={[<Icon onClick={_ => this.handleSelected(item)} type="eye" />, <Icon onClick={() => this.handleFavor(item.name)} type="heart" style={this.state.atualizaFavoritos ? { color: sessionStorage.getItem('favoritos') == null ? "gray" : (sessionStorage.getItem('favoritos').indexOf(item.name) > 0) ? "red" : "gray" } : { "": "" }} />]}>
                                 <Meta
                                     avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
                                     title={item.name}
