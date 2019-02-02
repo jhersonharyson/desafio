@@ -4,9 +4,14 @@ import HomeCompenent from './Home.component'
 
 
 class Home extends Component {
+    constructor(props){
+        super(props);
+        
+    }
     componentDidMount() {
         this.props.router('Buscar');
     }
+    
     render() {
        
         return (

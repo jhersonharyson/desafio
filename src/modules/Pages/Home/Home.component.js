@@ -1,22 +1,24 @@
 import React, { Component } from 'react';
 import { Input, Icon, Button, Card, Avatar } from 'antd'
+import { Redirect } from 'react-router-dom'
 import './Home.style.css'
 import axios from 'axios'
+
 
 const { Meta } = Card;
 
 class Home extends Component {
     constructor(props) {
-        super();
+        super(props);
         this.state = {
             isTypping: false,
             query: "",
             data: [],
+            selected: {},
 
-            
 
 
-          
+            visualizar: false,
             typingTimeout: 0,
             atualizaFavoritos: false
         }
@@ -89,8 +91,11 @@ class Home extends Component {
         this.setState({ atualizaFavoritos: true })
     }
 
-    getColor = async (nome) => {
-        const storage = sessionStorage.getItem('favoritos') == null ? "gray" : (storage.filter(n => n != nome)) ? "red" : "gray";
+
+    handleSelected = async (nome) => {
+        await this.setState({selected: nome});
+        localStorage.setItem('visualizar',nome)
+        await this.setState({visualizar: true});
     }
 
 
@@ -118,20 +123,23 @@ class Home extends Component {
                         return (
                             <Card key={index} style={{
                                 width: 300, marginTop: 16, marginLeft: 15, boxShadow: ".1px .1px 1px gray", "animationName": "fadein",
-                                "animation-duration": "2s",
-                                "animation-fill-mode": "forwards"
+                                "animationDuration": "2s",
+                                "animationFillMode": "forwards"
                             }}
-                                actions={[<Icon type="eye" />, <Icon onClick={() => this.handleFavor(item.name)} type="heart" style={this.state.atualizaFavoritos ? { color: sessionStorage.getItem('favoritos') == null ? "gray" : (sessionStorage.getItem('favoritos').indexOf(item.name) > 0) ? "red" : "gray" } : { "": "" }} />]}>
+                                actions={[<Icon onClick={_=>this.handleSelected(item.name)} type="eye" />, <Icon onClick={() => this.handleFavor(item.name)} type="heart" style={this.state.atualizaFavoritos ? { color: sessionStorage.getItem('favoritos') == null ? "gray" : (sessionStorage.getItem('favoritos').indexOf(item.name) > 0) ? "red" : "gray" } : { "": "" }} />]}>
                                 <Meta
                                     avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
                                     title={item.name}
-                                    description="This is the description"
+                                    description="Olá sou um personagem de Star Wars"
                                 />
                             </Card>
                         );
                     })
                     }
                 </div>
+                {
+                    this.state.visualizar && <Redirect to="/home/visualizar/" push={true} />
+                }
             </div>
         );
     }

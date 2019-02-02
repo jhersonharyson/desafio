@@ -4,9 +4,8 @@ import * as $               from 'jquery'
 import {notification, Button} from 'antd'
 // import logo                 from '../../img/logo.png';
 import TextField from '@material-ui/core/TextField'
-import axios from 'axios'
-// import Button from '@material-ui/core/Button' 
-// import Auth from '../Auth/Auth.security'
+//import axios from 'axios'
+
 
 import './Login.style.css';
 

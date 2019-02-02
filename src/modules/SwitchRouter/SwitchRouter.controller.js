@@ -7,9 +7,10 @@ import Vizualizar from '../Pages/Visualizar/Visualizar.page';
 import SideBar from '../Common/SideBar/Sidebar.component';
 
 class RouterSwitch extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = { router: "", permission: false }
+       
     }
 
     componentWillMount() {
