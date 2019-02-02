@@ -14,7 +14,12 @@ class Vizualizar extends Component {
         super(props);
         this.state = {
             selected: {},
-            species : {},
+            species: {},
+            vehicles: [],
+            starships: [],
+            films: [],
+
+            urlCount: Infinity,
             redirect: false
         }
 
@@ -30,10 +35,26 @@ class Vizualizar extends Component {
         } else {
             selected = await JSON.parse(selected)
             await this.setState({ selected })
-            const res = await axios.get(selected.species[0])
+            let res = await axios.get(selected.species[0])
             const species = res.data
-            await this.setState({species})
-            console.log(species)
+            await this.setState({ species })
+
+            res = []
+
+            await this.setState({ urlCount: selected.vehicles.length })
+
+            await this.setState({ vehicles: [] })
+
+            selected.vehicles.forEach(url => {
+                axios.get(url).then(async res => {
+                    let vehicles = this.state.vehicles
+                    vehicles.push(res.data)
+                    await this.setState({ vehicles, urlCount: this.state.urlCount - 1 })
+                    console.log(this.state.urlCount);
+                })
+            });
+
+
         }
 
     }
@@ -46,8 +67,10 @@ class Vizualizar extends Component {
 
         const columns = [{
             dataIndex: 'label',
+            width: 150,
         }, {
             dataIndex: 'value',
+            width: 150,
         }];
         const data = [{
             key: '1',
@@ -100,38 +123,54 @@ class Vizualizar extends Component {
             key: '1',
             label: <Content label="Espécie" />,
             value: species.name,
-
         }, {
             key: '2',
             label: <Content label="Classificação" />,
             value: species.classification,
-
         }, {
             key: '3',
             label: <Content label="Denominação" />,
-            value: species.designation
+            value: species.designation,
 
-        },
-        {
+        }, {
             key: '4',
             label: <Content label="Altura média" />,
             value: species.average_height
-
-        },
-        {
+        }, {
             key: '5',
             label: <Content label="Longevidade média" />,
             value: species.average_lifespan
-
-        },
-        {
+        }, {
             key: '6',
             label: <Content label="Linguagem" />,
             value: species.language
-        }
-    ]
+        }]
 
-        
+        let dataVehicle = []
+
+        this.state.vehicles.forEach((vhc, i) => {
+            const v = [{
+                key: 1,
+                label: <Content label="Nome" />,
+                value: vhc.name,
+            }, {
+                key: 2,
+                label: <Content label="Modelo" />,
+                value: vhc.model,
+            },
+            {
+                key: 3,
+                label: <Content label="Qt. Passageiros" />,
+                value: vhc.passengers,
+            },
+            {
+                key: 4,
+                label: <Content label="Custo em Creditos" />,
+                value: vhc.cost_in_credits,
+            }
+            ]
+            dataVehicle.push(v)
+        })
 
         return (
             <div style={{ minHeight: "80%", height: "100%" }} >
@@ -140,14 +179,32 @@ class Vizualizar extends Component {
                 </div>
                 <Divider orientation="left">Informações Básicas</Divider>
 
-                <div style={{ maxWidth: "100%"}}>
+                <div style={{ maxWidth: "100%" }}>
                     <Table columns={columns} dataSource={data} size="small" small showHeader={false} pagination={false} />
                 </div>
                 <Divider orientation="left">Informações de Raça </Divider>
-                <div style={{ maxWidth: "100%"}}>
+                <div style={{ maxWidth: "100%" }}>
                     <Table columns={columns} dataSource={dataSpecies} size="small" small showHeader={false} pagination={false} />
                 </div>
+                {
+                    this.state.urlCount === 0 ? (
+                        <div>
+                            <Divider orientation="left">Informações de Veículos Utilizados </Divider>
+                            <div style={{ maxWidth: "100%" }}>
+                                {dataVehicle.map(dataVhc => (
+                                    <Table style={{ marginBottom: "5px" }} columns={columns} dataSource={dataVhc} size="small" small showHeader={false} pagination={false} />
+                                ))}
+                            </div>
+                        </div>
+                    ) :
+                        <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", margin: "15px" }}>
+                            <Icon type="loading" spin style={{ fontSize: "100px" }}></Icon>
+                        </div>
+                }
 
+                <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginTop: "15px" }}>
+                    <Button block onClick={_ => { this.setState({ redirect: true }) }} type="primary"> Voltar</Button>
+                </div>
                 {
                     this.state.redirect && <Redirect to="/home/" push={true} />
                 }
