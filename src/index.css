@@ -1,0 +1,227 @@
+@import '~antd/dist/antd.css';
+
+@import url('https://fonts.googleapis.com/css?family=Arial');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+
+}
+#d{
+	background-color: black;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  /* overflow: hidden; */
+  
+}
+
+.container {
+  padding: 0px 0;
+  height: 100%;
+
+  width: 100%;
+  color: #fff;
+  font-family: "Comfortaa", "Helvetica", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.login {
+  width: 280px;
+  height: 500px;
+  background-color: #0a0a0a99;
+  border-radius: 15px;
+  box-shadow: 5px 5px 25px gray;
+}
+
+.login-icon-field {
+  height: 250px;
+  width: 100%;
+  
+}
+
+.login-icon {
+  margin: 50px 65px;
+}
+
+.login-form {
+  padding: 8px 20px 20px;
+  height: 120px;
+  width: 100%;
+  
+}
+
+
+
+.username-row {
+  position: relative;
+  height: 40px;
+  
+  border-bottom: 1px solid;
+  margin-bottom: 10px;
+}
+
+.password-row {
+  position: relative;
+  height: 40px;
+ 
+  border-bottom: 1px solid;
+}
+
+.password-icon,
+.user-icon {
+  margin: 5px;
+}
+
+.password-icon .key-path,
+.user-icon .user-path{
+  fill: rgba(10,10,10,0);
+  stroke: #fff;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-miterlimit: 10;
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  -webkit-animation: dash 3s .3s linear forwards;
+  animation: dash 3s .3s linear forwards;
+}
+
+.user-icon .user-path {
+  -webkit-animation: dash 3s .8s linear forwards;
+  animation: dash 3s .8s linear forwards;
+}
+
+.login-container input {
+  position: absolute;
+  width: 195px;
+  height: 30px;
+  margin: 5px 0;
+  background: transparent;
+  border: none;
+}
+
+.login-container input:focus,
+button:focus {
+  outline: none;
+}
+
+.login-container input::-webkit-input-placeholder {
+  color: rgba(255,255,255,.4);
+}
+
+.login-container input::-moz-placeholder {
+  color: rgba(255,255,255,.4);
+}
+
+.call-to-action {
+  margin: 22px 0;
+  height: 130px;
+  width: 100%;
+  
+}
+
+.login-container button {
+  display: block;
+  width: 240px;
+  height: 40px;
+  padding: 0;
+  margin: 10px 20px 10px 20px;
+  font-weight: 700;
+  color: #fff;
+  background-color: #009dc0;
+  border: none;
+  border-radius: 20px;
+  transition: background-color .10s ease-in-out;
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+}
+
+.login-container button:hover {
+  background-color: #26d69a;
+}
+
+.login-container button:active {
+  background-color: #1eaa7a;
+}
+
+p {
+  display: inline-block;
+  width: 200px;
+  margin: 0 40px;
+  font-size: .8rem;
+  color: rgba(255,255,255,.4);
+  
+}
+
+p a {
+  color: #fff;
+}
+
+
+p a:hover {
+  -webkit-cursor: pointer;
+  cursor: pointer;
+}
+
+@-webkit-keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.login-container input{
+  color: white;
+} 
+
+
+
+
+.MuiFormLabel-root-12.MuiFormLabel-filled-16.MuiInputLabel-root-5.MuiInputLabel-formControl-6.MuiInputLabel-animated-9.MuiInputLabel-shrink-8{
+  margin-bottom: -15px;
+}
+.MuiFormLabel-root-12.MuiInputLabel-root-5.MuiInputLabel-formControl-6.MuiInputLabel-animated-9{
+  margin-bottom: -15px;
+
+}
+
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  -webkit-border-radius: 16px;
+}
+
+::-webkit-scrollbar-track-piece {
+  background-color: #ffffff;
+  -webkit-border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:vertical {
+  height: 5px;
+  background-color: #666;
+  -webkit-border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+  width: 5px;
+  background-color: #666;
+  -webkit-border-radius: 3px;
+}
