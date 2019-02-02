@@ -7,8 +7,6 @@ import { Layout, Menu, Icon, Breadcrumb } from 'antd';
 import './Sidebar.style.css';
 
 const { Header, Sider, Content, Footer } = Layout;
-const SubMenu = Menu.SubMenu;
-
 
 class Sidebar extends Component {
 
@@ -43,18 +41,11 @@ class Sidebar extends Component {
                                 $('.link-home').click();
                             }}> Buscar </span>
                         </Menu.Item>
-                        <Menu.Item key="2">
-                            <Link className="link-home-dash" to="/home/dash" />
-                            <Icon type="home" />
-                            <span onClick={() => {
-                                $('.link-home-dash').click();
-                            }}> Dashboard </span>
-                        </Menu.Item>
                         <Menu.Item key="3">
-                            <Link className="link-home-dash" to="/home/dash" />
+                            <Link className="link-home-favor" to="/home/favoritos" />
                             <Icon type="heart" />
                             <span onClick={() => {
-                                $('.link-home-dash').click();
+                                $('.link-home-favor').click();
                             }}> Favoritos </span>
                         </Menu.Item>
                         <Menu.Item onClick={() => {

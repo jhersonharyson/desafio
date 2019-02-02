@@ -4,6 +4,7 @@ import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import Login from '../Login/Login.component';
 import Home from '../Pages/Home/Home.page';
 import Vizualizar from '../Pages/Visualizar/Visualizar.page';
+import Favoritos from '../Pages/Favor/Favor.page'
 import SideBar from '../Common/SideBar/Sidebar.component';
 
 class RouterSwitch extends Component {
@@ -31,6 +32,7 @@ class RouterSwitch extends Component {
                                 router={this.state.router} >
                                     <Route path="/home/" exact={true} render={(props) => <Home {...props} router={(router) => this.setState({ router })} />} />
                                     <Route path="/home/visualizar" exact={true} render={(props) => <Vizualizar {...props} router={(router) => this.setState({ router })} />} />
+                                    <Route path="/home/favoritos" exact={true} render={(props) => <Favoritos {...props} router={(router) => this.setState({ router })} />} />
                                 </SideBar>
                             </div>
                         </Route>
