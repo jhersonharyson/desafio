@@ -89,11 +89,34 @@ class Vizualizar extends Component {
 
                 })
             });
+        }
+    }
 
+    componentDidMount(){
+        this.setState({atualizaFavoritos: true})
+    }
 
+    handleFavor = async (nome) => { // seria melhor buscar atraves de uma chave ao invés do no nome
+        let storage = await sessionStorage.getItem('favoritos');
+        storage = JSON.parse(storage)
+
+        if (!storage) {
+            storage = []
+            storage.push(nome)
+        }
+        else if (storage.indexOf(nome) >= 0) {
+            storage.splice(storage.indexOf(nome), 1)
+
+        } else {
+            storage.push(nome)
         }
 
+        sessionStorage.setItem('favoritos', storage)
+
+        await sessionStorage.setItem('favoritos', JSON.stringify(storage));
+        this.setState({ atualizaFavoritos: true })
     }
+
     componentWillUnmount = () => {
         localStorage.removeItem('visualizar');
     }
@@ -303,13 +326,16 @@ class Vizualizar extends Component {
 
             ]
             dataFilms.push(f)
-            console.log(dataFilms)
+            
         })
 
         return (
             <div style={{ minHeight: "80%", height: "100%" }} >
                 <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
-                    <h1>{selected.name}</h1> <Button onClick={_ => { this.setState({ redirect: true }) }} type="primary"> Voltar</Button>
+                    <div style={{display: "flex", flexDirection: "row", alignItems: "center"}}><h1>{selected.name}</h1><Button onClick={() => this.handleFavor(selected.name)} size="large" style={{fontSize: "28px", marginLeft: "20px"}} ><Icon type="heart" style={this.state.atualizaFavoritos ? { color: sessionStorage.getItem('favoritos') == null ? "gray" : (sessionStorage.getItem('favoritos').indexOf(selected.name) > 0) ? "red" : "gray" } : { "": "" }} />
+                    </Button></div><div>
+                        <Button onClick={_ => { this.setState({ redirect: true }) }} type="primary" size="large"> Voltar</Button>
+                    </div>
                 </div>
                 <Divider orientation="left">Informações Básicas</Divider>
 
@@ -386,7 +412,7 @@ class Vizualizar extends Component {
                 }
 
                 <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginTop: "15px" }}>
-                    <Button block onClick={_ => { this.setState({ redirect: true }) }} type="primary"> Voltar</Button>
+                    <Button size="large" block onClick={_ => { this.setState({ redirect: true }) }} type="primary"> Voltar</Button>
                 </div>
                 {
                     this.state.redirect && <Redirect to="/home/" push={true} />

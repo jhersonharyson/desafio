@@ -32,7 +32,7 @@ class Home extends Component {
 
     handleChange = async (event) => {
         const { value } = event.target
-        console.log(value)
+       
         this.setState({ isTypping: true, query: value })
 
 
@@ -84,10 +84,6 @@ class Home extends Component {
             storage.push(nome)
         }
 
-
-        // console.log(storage)
-        // console.log(nome)
-
         sessionStorage.setItem('favoritos', storage)
 
         await sessionStorage.setItem('favoritos', JSON.stringify(storage));
@@ -124,7 +120,7 @@ class Home extends Component {
                 await this.setState({ data })
                 await this.setState({ urlCount: this.state.urlCount - 1 })
                 if (this.state.urlCount === 0) {
-                    console.log(data)
+                  
                     this.setState({ atualizaFavoritos: true })
                 }
             })

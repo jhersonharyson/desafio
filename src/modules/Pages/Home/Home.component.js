@@ -29,7 +29,7 @@ class Home extends Component {
 
     handleChange = async (event) => {
         const { value } = event.target
-        console.log(value)
+     
         this.setState({ isTypping: true, query: value })
 
 
@@ -80,10 +80,6 @@ class Home extends Component {
         } else {
             storage.push(nome)
         }
-
-
-        // console.log(storage)
-        // console.log(nome)
 
         sessionStorage.setItem('favoritos', storage)
 
