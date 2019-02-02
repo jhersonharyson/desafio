@@ -10,12 +10,10 @@ const { Header, Sider, Content, Footer } = Layout;
 const SubMenu = Menu.SubMenu;
 
 
-class SidebarFuncionario extends Component {
+class Sidebar extends Component {
 
 
-    havePermissionAdm = false;
-
-    onCollapse = (collapsed) => {
+       onCollapse = (collapsed) => {
         console.log(collapsed);
         this.setState({ collapsed });
     }
@@ -26,16 +24,6 @@ class SidebarFuncionario extends Component {
 
     componentWillMount() {
 
-        const permission = JSON.parse(localStorage.getItem('perfil'))
-        let allUserPermission = [];
-        if (permission)
-            permission.forEach(perfil => {
-                allUserPermission.push(perfil.nome)
-            });
-        // console.log(allUserPermission);
-        this.havePermissionAdm = allUserPermission.find((pfl) => ['Administrador', 'Cliente'].find(e => e === pfl))
-        // console.log(this.havePermissionAdm);
-        allUserPermission.find((pfl) => { if (pfl === 'Cliente') { this.pfl = 'Cliente'; return true } else return false })
     }
 
 
@@ -100,6 +88,6 @@ class SidebarFuncionario extends Component {
     }
 }
 
-export default SidebarFuncionario;
+export default Sidebar;
 
 
